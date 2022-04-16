@@ -10,8 +10,8 @@ import datetime as dt
 # Model for Neighborhood Class
 
 class Neighborhood(models.Model):
-    name = models.CharField(max_length=50)
-    location = models.CharField(max_length=60)
+    name = models.CharField(max_length=80)
+    location = models.CharField(max_length=80)
     admin = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name='hood')
     image = models.ImageField(upload_to='images/')
     description = models.TextField()
@@ -37,7 +37,7 @@ class Neighborhood(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     name = models.CharField(max_length=80, blank=True)
-    bio = models.TextField(max_length=254, blank=True)
+    bio = models.TextField(max_length=500, blank=True)
     profile_picture = models.ImageField(upload_to='images/', default='default.png')
     location = models.CharField(max_length=50, blank=True, null=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.SET_NULL, null=True, related_name='members', blank=True)
@@ -58,8 +58,8 @@ class Profile(models.Model):
 # Model for Business Class
 
 class Business(models.Model):
-    name = models.CharField(max_length=120)
-    email = models.EmailField(max_length=254)
+    name = models.CharField(max_length=150)
+    email = models.EmailField(max_length=280)
     description = models.TextField(blank=True)
     neighbourhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='business')
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner')
@@ -81,8 +81,8 @@ class Business(models.Model):
 # Model for Post Class
 
 class Post(models.Model):
-    title = models.CharField(max_length=120, null=True)
+    title = models.CharField(max_length=150, null=True)
     post = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_owner')
-    hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='hood_post')
+    hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='neighborhood_post')
