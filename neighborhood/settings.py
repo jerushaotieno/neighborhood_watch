@@ -79,8 +79,8 @@ WSGI_APPLICATION = 'neighborhood.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hoodwatchtribune',
-        'USER': 'moringa>',
+        'NAME': 'hoodwatch',
+        'USER': 'moringa',
     'PASSWORD':'Access>',
     }
 }
