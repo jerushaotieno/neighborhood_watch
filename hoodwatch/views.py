@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http  import Http404, HttpResponse
 import datetime as dt
-from .models import Post
-
+from .models import Neighborhood, Profile, Business, Post
 
 # Create your views here.
 def welcome(request):
@@ -33,3 +32,57 @@ def past_days_posts(request, past_date):
 
     hoodwatch = Post.days_posts(date)
     return render(request, 'all-posts/past-posts.html', {"date": date, "hoodwatch":hoodwatch})
+
+
+# View Function to present all neighborhoods
+
+def hoods(request):
+    all_hoods = Neighborhood.objects.all()
+    all_hoods = all_hoods[::-1]
+    params = {
+        'all_hoods': all_hoods,
+    }
+    return render(request, 'index.html', params)
+
+
+def create_hood(request):
+    if request.method == 'POST':
+        form = NeighborhoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.admin = request.user.profile
+            hood.save()
+            return redirect('hood')
+    else:
+        form = NeighborhoodForm()
+    return render(request, 'newhood.html', {'form': form})
+
+
+def single_hood(request, hood_id):
+    hood = Neighborhood.objects.get(id=hood_id)
+    business = Business.objects.filter(neighbourhood=hood)
+    posts = Post.objects.filter(hood=hood)
+    posts = posts[::-1]
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            b_form = form.save(commit=False)
+            b_form.neighbourhood = hood
+            b_form.user = request.user.profile
+            b_form.save()
+            return redirect('single-hood', hood.id)
+    else:
+        form = BusinessForm()
+    params = {
+        'hood': hood,
+        'business': business,
+        'form': form,
+        'posts': posts
+    }
+    return render(request, 'single_hood.html', params)
+
+
+def hood_members(request, hood_id):
+    hood = Neighborhood.objects.get(id=hood_id)
+    members = Profile.objects.filter(neighbourhood=hood)
+    return render(request, 'members.html', {'members': members})

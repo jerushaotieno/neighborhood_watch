@@ -4,4 +4,6 @@ from django.contrib import admin
 
 urlpatterns=[
     url('^$',views.posts_of_day,name = 'postsToday'),
+    url('^$',views.posts_of_day,name = 'postsToday'),
+
 ]

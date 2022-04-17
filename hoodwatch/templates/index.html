@@ -1,1 +1,36 @@
-<h1> Welcome to Hood Watch!</h1>
+{%extends 'all-hoods/base.html'%}
+{% block content %} 
+{{ block.super}}
+
+<div class="container">
+
+    <!-- Looping through posts   -->
+    
+    <div class="row">
+        {% for posts_item in hoodwatch %}
+
+        <div class="col" style="float: left; width: 30%;">
+            <div class="card" style="width: 20rem; margin-bottom: 30px; margin-top: 15px;">
+                <!-- <img src="{{posts_item.image.url}}" class="card-img-top img-responsive" alt="Image"> -->
+                <div class="card-body" style="text-align: center;">
+                    <h4 class="card-title font-weight-bold">{{ posts_item.title }}</h4>
+                    <p class="card-text" style="font-size: medium;">{{ posts_item.post }}</p>
+                    <p class="card-text" style="font-style:italic; font-size: small;"> Posted by {{ posts_item.user }} on </p> <span>
+                    <p class="card-text" style="font-style:italic; font-size: small;">{{ posts_item.posted_on }} about {{ posts_item.hood }} </p> </span>
+                    <a href="{{ posts_item.hood }}" class="btn btn-link" style="font-style:italic;"> Visit Neighborhood </a>
+                </div>
+            </div>
+        </div>
+
+
+    {% empty %}
+    <div class="row">
+        <h2 class="text-center">There are NO Post Items</h2>
+    </div>
+    {% endfor %}
+    </div>    
+
+
+</div>
+
+{% endblock %}
