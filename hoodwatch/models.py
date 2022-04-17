@@ -86,3 +86,4 @@ class Post(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_owner')
     hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='neighborhood_post')
+    posted_on = models.DateTimeField(auto_now_add=True)
