@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http  import Http404, HttpResponse
 import datetime as dt
+from .models import Post
 
 
 # Create your views here.
@@ -11,7 +12,8 @@ def welcome(request):
 # View Function to present posts from past days
 def posts_of_day(request):
     date = dt.date.today()
-    return render(request, 'all-posts/today-posts.html', {"date": date,})
+    hoodwatch = Post.objects.all()
+    return render(request, 'all-posts/today-posts.html', {"date": date, "hoodwatch":hoodwatch})
 
 
 # View Function to present posts from past days
@@ -29,4 +31,5 @@ def past_days_posts(request, past_date):
     if date == dt.date.today():
         return redirect(posts_of_day)
 
-    return render(request, 'all-posts/past-posts.html', {"date": date})
+    hoodwatch = Post.days_posts(date)
+    return render(request, 'all-posts/past-posts.html', {"date": date, "hoodwatch":hoodwatch})

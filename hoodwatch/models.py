@@ -87,3 +87,20 @@ class Post(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_owner')
     hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='neighborhood_post')
     posted_on = models.DateTimeField(auto_now_add=True)
+
+
+# Class Method to Get the Day's Posts
+
+    @classmethod
+    def posts_of_day(cls):
+        today = dt.date.today()
+        posts = cls.objects.filter(posted_on__date = today)
+        return posts
+
+
+# Class Method to Get Any Day's Posts
+
+    @classmethod
+    def days_posts(cls,date):
+        posts = cls.objects.filter(posted_on__date = date)
+        return posts
