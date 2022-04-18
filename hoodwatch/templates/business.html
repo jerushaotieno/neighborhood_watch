@@ -1,0 +1,37 @@
+{% extends 'all-posts/base.html' %}
+{% block content %} 
+{{ block.super}}
+
+<div class="container">
+
+    <!-- Looping through businesses   -->
+    
+    <div class="row">
+        {% for business_item in hoodwatch %}
+
+        <div class="col" style="float: left; width: 30%;">
+            <div class="card" style="width: 20rem; margin-bottom: 30px; margin-top: 15px;">
+                <img src="{{business_item.image.url}}" class="card-img-top img-responsive" alt="Image">
+                <div class="card-body" style="text-align: center;">
+                    <h4 class="card-title font-weight-bold">{{ business_item.name }}, {{ business_item.neighborhood }}</h4>
+                    <p class="card-text" style="font-size: medium;">{{ business_item.email }}</p>
+                    <p class="card-text" style="font-size: medium;">{{ business_item.description }}</p>
+                    <!-- <p class="card-text" style="font-size: medium;">{{ hoods_item.police_number }}</p> -->
+                    <p class="card-text" style="font-style:italic; font-size: small;"> Posted by {{ business_item.admin }} </p>
+                    <a href="{{ business_item.image }}" class="btn btn-link" style="font-style:italic;"> Check Out the Business </a>
+                </div>
+            </div>
+        </div>
+
+
+    {% empty %}
+    <div class="row">
+        <h2 class="text-center"> There are NO Neighborhoods Listed </h2>
+    </div>
+    {% endfor %}
+    </div>    
+
+
+</div>
+
+{% endblock %}

@@ -38,10 +38,12 @@ def past_days_posts(request, past_date):
 # View Function to present all neighborhoods
 
 def hoods(request):
-    all_hoods = Neighborhood.objects.all()
-    all_hoods = all_hoods[::-1]
+
+    hoodwatch = Neighborhood.objects.all()
+    # print(all_hoods)
+    # all_hoods = all_hoods[::-1]
     params = {
-        'all_hoods': all_hoods,
+        'hoodwatch': hoodwatch,
     }
     return render(request, 'index.html', params)
 
@@ -86,7 +88,24 @@ def single_hood(request, hood_id):
     return render(request, 'single_hood.html', params)
 
 
-def hood_members(request, hood_id):
-    hood = Neighborhood.objects.get(id=hood_id)
-    members = Profile.objects.filter(neighbourhood=hood)
-    return render(request, 'members.html', {'members': members})
+def business(request):
+    hoodwatch = Business.objects.all()
+    params = {
+        'hoodwatch': hoodwatch,
+    }
+    return render(request, 'business.html', params)
+
+
+def create_business(request):
+    if request.method == 'POST':
+        form = BusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.admin = request.user.profile
+            business.save()
+            return redirect('hood')
+    else:
+        form = BusinessForm()
+    return render(request, 'newbusiness.html', {'form': form})
+
+

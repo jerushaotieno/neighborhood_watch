@@ -4,38 +4,6 @@
 
 <div class="container">
 
-    <!-- Looping through neighborhoods   -->
-    
-    <div class="row">
-        {% for hoods_item in hoodwatch %}
-
-        <div class="col" style="float: left; width: 30%;">
-            <div class="card" style="width: 20rem; margin-bottom: 30px; margin-top: 15px;">
-                <img src="{{hoods_item.image.url}}" class="card-img-top img-responsive" alt="Image">
-                <div class="card-body" style="text-align: center;">
-                    <h4 class="card-title font-weight-bold">{{ hoods_item.name }}, {{ hoods_item.location }}</h4>
-                    <p class="card-text" style="font-size: medium;">{{ hoods_item.description }}</p>
-                    <p class="card-text" style="font-size: medium;">{{ hoods_item.local_hospital }}</p>
-                    <p class="card-text" style="font-size: medium;">{{ hoods_item.police_number }}</p>
-                    <p class="card-text" style="font-style:italic; font-size: small;"> Posted by {{ hoods_item.admin }} on </p> <span>
-                    <a href="{{ hoods_item.image }}" class="btn btn-link" style="font-style:italic;"> Checkout Neighborhood </a>
-                </div>
-            </div>
-        </div>
-
-
-    {% empty %}
-    <div class="row">
-        <h2 class="text-center"> There are NO Neighborhoods Listed </h2>
-    </div>
-    {% endfor %}
-    </div>    
-
-
-</div>
-
-<div class="container">
-
     <!-- Looping through posts   -->
     
     <div class="row">
