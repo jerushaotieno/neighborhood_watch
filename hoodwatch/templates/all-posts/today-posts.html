@@ -2,6 +2,10 @@
 {% block content %} 
 {{ block.super}}
 
+<div>
+    <h2 class='text-center' style="text-decoration: underline; color: blue;"> Posts Available: {{date|date:"l d-F Y"}}</h2>
+</div>
+
 <div class="container">
 
     <!-- Looping through posts   -->

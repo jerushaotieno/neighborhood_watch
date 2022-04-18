@@ -63,6 +63,7 @@ class Business(models.Model):
     description = models.TextField(blank=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='business')
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner')
+    image = models.ImageField(upload_to='images/', default='default.png')
 
     def __str__(self):
         return f'{self.name}'
