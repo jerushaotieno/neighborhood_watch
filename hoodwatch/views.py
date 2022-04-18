@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http  import Http404, HttpResponse
 import datetime as dt
 from .models import Neighborhood, Profile, Business, Post
+from .forms import NeighborhoodForm, BusinessForm
 
 # Create your views here.
 def welcome(request):
@@ -43,6 +44,9 @@ def hoods(request):
         'all_hoods': all_hoods,
     }
     return render(request, 'index.html', params)
+
+    # all_hoods = Neighborhood.objects.all()
+    # return render(request, 'all_hoods/today-posts.html', {"hoodwatch":all_hoods})
 
 
 def create_hood(request):
