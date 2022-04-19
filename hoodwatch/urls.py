@@ -13,6 +13,7 @@ urlpatterns=[
     url('^$',views.hoods, name = 'hoods'),
     url(r'^posts/', views.posts_of_day, name = 'postsToday'),
     url(r'^business/', views.business, name = 'business'),
+    url(r'^search/', views.search_business, name='search_business')
 ]
 
 if settings.DEBUG:
