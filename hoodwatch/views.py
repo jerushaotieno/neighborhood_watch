@@ -124,3 +124,6 @@ def search_business(request):
         return render(request, 'all-posts/search.html',{"message":message})
 
 
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    return render(request, 'profile.html')

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<nav class="navbar navbar-inverse" style="padding: 3%;">
+<nav class="navbar navbar-inverse" style="padding: 20px;">
     <div class="container-fluid">
         <div class="navbar-header" style="font-size: smaller; font-weight: 5px;">
         <a class="navbar-brand" href="{% url 'hoods' %}"> Hood Watch </a>
@@ -29,6 +29,29 @@
             </form>
         </div>
         <!-- search form end -->
+
+        <!-- Login/Logout Authentication -->
+
+        <div class="col-sm-6 col-md-6" style="text-align: right;">
+            {% if user.is_authenticated %}
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Account
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="/">Home</a></li>
+                    <li><a class="dropdown-item" href="/accounts/password_reset">Change Password</a></li>
+                    <li><a class="dropdown-item" href="/accounts/logout">Log Out</a></li>
+                </ul>
+            </div>
+                {% else %}
+
+                <a class='btn btn-default' href="/accounts/login">Login</a>
+                <a class='btn btn-default' href="/accounts/register">Sign Up</a>
+
+
+                {% endif %}
+            </div>
     </div>
 </nav>
 </body>
