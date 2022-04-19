@@ -58,7 +58,7 @@ class Profile(models.Model):
 # Model for Business Class
 
 class Business(models.Model):
-    name = models.CharField(max_length=150)
+    title = models.CharField(max_length=150)
     email = models.EmailField(max_length=280)
     description = models.TextField(blank=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='business')
@@ -76,7 +76,7 @@ class Business(models.Model):
 
     @classmethod
     def search_business(cls,search_term):
-        business = cls.objects.filter(name__icontains=search_term)
+        business = cls.objects.filter(title__icontains=search_term)
         return business
 
         
