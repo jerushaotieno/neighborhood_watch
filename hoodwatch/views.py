@@ -3,6 +3,7 @@ from django.http  import Http404, HttpResponse
 import datetime as dt
 from .models import Neighborhood, Profile, Business, Post
 from .forms import NeighborhoodForm, BusinessForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def welcome(request):
@@ -121,3 +122,5 @@ def search_business(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'all-posts/search.html',{"message":message})
+
+
